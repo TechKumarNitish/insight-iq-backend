@@ -4,10 +4,13 @@ exports.getAllMentors = async (req, res) => {
   try {
     const mentors = await User.find({ accountType: "Mentor" })
       .populate({
-        path: "mentorDetails",
+        path: "additionalDetails",
         populate: {
-          path: "areaOfInterest",
-          model: "Technology"
+          path: "areaOfExpertise",
+          populate: {
+            path:"tags",
+            model:"Tag"
+          }
         }
       })
       .select("-password"); // hide password
