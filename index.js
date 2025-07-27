@@ -4,6 +4,10 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 
+const Tag=require("./models/Tag");
+const Technology=require("./models/Technology");
+const Mentor=require("./models/MentorDetail");
+
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 4000;

@@ -17,7 +17,7 @@ const userShema=new mongoose.Schema({
     },
     accountType:{
         type:String,
-        enum:["Admin","Student","Counsellor"],
+        enum:["Admin","Student","Mentor"],
         default:"Student",
         required:true,
     },
@@ -25,6 +25,11 @@ const userShema=new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         required:true,
         ref:"Profile",
+    },
+    mentorDetails:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Mentor",
+        // required:true,
     },
     // courses:[{
     //     type:mongoose.Schema.Types.ObjectId,

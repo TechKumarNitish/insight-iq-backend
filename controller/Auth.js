@@ -75,7 +75,7 @@ exports.signUp=async(req,res)=>{
             fullName,
             email,
             password,
-            // accountType,
+            accountType="Student",
             // contactNumber,
             // otp
         }=req.body;
@@ -137,15 +137,17 @@ exports.signUp=async(req,res)=>{
             about:null,
             contactNumber:null
         });
+        
         const user=await User.create({
         fullName,
         email,
         // contactNumber,
         password:hashPassword,
-        // accountType,
+        accountType,
         additionalDetails:profileDetails._id,
         image:`https://api.dicebear.com/5.x/initials/svg?seed=${fullName}`,
         });
+        user.password=undefined; //to not send password in response
 
         //return res
         return res.status(200).json({
