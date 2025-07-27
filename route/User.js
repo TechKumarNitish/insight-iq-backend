@@ -46,3 +46,33 @@ router.post("/signup", signUp)
 
 // // Export the router for use in the main application
 module.exports = router
+
+
+
+
+
+
+
+
+
+/**
+ * @swagger
+ * /auth/login:
+ *   post:
+ *     summary: User login
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Logged in successfully
+ */

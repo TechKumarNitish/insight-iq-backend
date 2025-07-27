@@ -1,23 +1,149 @@
 openapi: 3.0.0
 info:
-  title: InsightIQ API
+  title: Insight IQ Auth API
   version: 1.0.0
+  description: Authentication-related APIs including Signup and Login.
+
+servers:
+  - url: https://insight-iq-backend.onrender.com/api/v1
+
 paths:
-  /api/v1/auth/login:
+  /auth/signup:
     post:
-      summary: Login user
+      summary: Register a new user
+      tags:
+        - Auth
       requestBody:
         required: true
         content:
           application/json:
             schema:
               type: object
-              required: [email, password]
+              properties:
+                fullName:
+                  type: string
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                accountType:
+                  type: string
+                  enum: [Student, Mentor]
+                imageUrl:
+                  type: string
+                  format: uri
+                active:
+                  type: boolean
+              required: [fullName, email, password]
+      responses:
+        200:
+          description: User registered successfully
+        401:
+          description: User already registered
+        403:
+          description: Missing required fields
+
+  /auth/login:
+    post:
+      summary: Login user
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
               properties:
                 email:
                   type: string
+                  format: email
                 password:
                   type: string
+              required: [email, password]
+      responses:
+        200:
+          description: Login successful with JWT token
+        401:
+          description: Invalid credentials
+        403:
+          description: Missing required fields
+
+  /api/v1/mentors:
+    get:
+      summary: Get all mentors with their details
+      tags:
+        - Mentors
       responses:
         '200':
-          description: Successful login
+          description: A list of mentor users
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/User'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    Technology:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: "60d0fe4f5311236168a109ca"
+        tech_name:
+          type: string
+          example: "React"
+
+    MentorDetail:
+      type: object
+      properties:
+        _id:
+          type: string
+        description:
+          type: string
+        areaOfInterest:
+          type: array
+          items:
+            $ref: '#/components/schemas/Technology'
+
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+        fullName:
+          type: string
+        email:
+          type: string
+        accountType:
+          type: string
+          example: "Mentor"
+        image:
+          type: string
+        mentorDetails:
+          $ref: '#/components/schemas/MentorDetail'
+
+    Error:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        message:
+          type: string
+          example: "Failed to fetch mentors"
