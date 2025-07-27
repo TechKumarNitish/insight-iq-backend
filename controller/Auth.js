@@ -139,6 +139,8 @@ exports.signUp=async(req,res)=>{
             contactNumber:null,
             areaOfExpertise:[],
         });
+        const img=imageUrl || `https://api.dicebear.com/5.x/initials/svg?seed=${fullName}`
+        console.log("saving: ", fullName, email, hashPassword, accountType, profileDetails._id, img);
         
         const user=await User.create({
         fullName,
@@ -147,7 +149,7 @@ exports.signUp=async(req,res)=>{
         password:hashPassword,
         accountType,
         additionalDetails:profileDetails._id,
-        image:imageUrl || `https://api.dicebear.com/5.x/initials/svg?seed=${fullName}`,
+        image:img,
         });
         user.password=undefined; //to not send password in response
 
