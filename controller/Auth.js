@@ -76,6 +76,7 @@ exports.signUp=async(req,res)=>{
             email,
             password,
             accountType="Student",
+            imageUrl=null
             // contactNumber,
             // otp
         }=req.body;
@@ -146,7 +147,7 @@ exports.signUp=async(req,res)=>{
         password:hashPassword,
         accountType,
         additionalDetails:profileDetails._id,
-        image:`https://api.dicebear.com/5.x/initials/svg?seed=${fullName}`,
+        image:imageUrl || `https://api.dicebear.com/5.x/initials/svg?seed=${fullName}`,
         });
         user.password=undefined; //to not send password in response
 

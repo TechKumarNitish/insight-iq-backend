@@ -3,6 +3,8 @@ const userRoutes = require("./route/User");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
+const swaggerUi = require('swagger-ui-express');
+const YAML = require('yamljs');
 
 const Tag=require("./models/Tag");
 const Technology=require("./models/Technology");
@@ -17,6 +19,11 @@ app.use(cors({
   origin: "*",
   credentials: true,
 }));
+
+  
+// const swaggerDocument = YAML.load('./docs/openapi.yaml');
+
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use((req, res, next) => {
   console.log(`${req.method} request for '${req.url}'`);
