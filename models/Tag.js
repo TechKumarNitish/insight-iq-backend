@@ -2,11 +2,15 @@ const mongoose = require('mongoose');
 
 const tagSchema = new mongoose.Schema(
   {
-    name: {
+    tag_name: {
       type: String,
       required: true,
       trim: true,
       unique: true
+    },
+    active: {
+      type: Boolean,
+        default: true
     },
     // color: {
     //   type: String,

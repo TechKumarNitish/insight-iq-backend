@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const technologySchema = new mongoose.Schema(
   {
-    name: {
+    tech_name: {
       type: String,
       required: true,
       unique: true,
@@ -26,7 +26,11 @@ const technologySchema = new mongoose.Schema(
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Tag'
       }
-    ]
+    ],
+    active: {
+      type: Boolean,
+      default: true
+    }
   },
   {
     timestamps: true

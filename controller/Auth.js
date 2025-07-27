@@ -76,7 +76,8 @@ exports.signUp=async(req,res)=>{
             email,
             password,
             accountType="Student",
-            imageUrl=null
+            imageUrl=null,
+            active=true
             // contactNumber,
             // otp
         }=req.body;
@@ -150,6 +151,7 @@ exports.signUp=async(req,res)=>{
         accountType,
         additionalDetails:profileDetails._id,
         image:img,
+        active
         });
         user.password=undefined; //to not send password in response
 

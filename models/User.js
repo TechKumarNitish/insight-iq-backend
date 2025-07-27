@@ -40,6 +40,10 @@ const userShema=new mongoose.Schema({
     resetPasswordExpires:{
         type:Date,
     },
+    active:{
+        type:Boolean,
+        default:true
+    },
     // courseProgress:[{
     //     type:mongoose.Schema.Types.ObjectId,
     //     red:"CourseProgress",
