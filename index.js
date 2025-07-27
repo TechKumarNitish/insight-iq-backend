@@ -6,7 +6,6 @@ const mongoose = require("mongoose");
 
 const Tag=require("./models/Tag");
 const Technology=require("./models/Technology");
-const Mentor=require("./models/MentorDetail");
 
 dotenv.config();
 const app = express();

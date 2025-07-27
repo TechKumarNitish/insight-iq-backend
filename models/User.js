@@ -26,11 +26,6 @@ const userShema=new mongoose.Schema({
         required:true,
         ref:"Profile",
     },
-    mentorDetails:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"Mentor",
-        // required:true,
-    },
     // courses:[{
     //     type:mongoose.Schema.Types.ObjectId,
     //     ref:"Course"

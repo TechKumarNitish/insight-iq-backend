@@ -7,14 +7,18 @@ const profileSchema=new mongoose.Schema({
     dateOfBirth:{
         type:String
     },
-    about:{
-        type:String,
-        trim:true 
-    },
     contactNumber:{
         type:Number,
         trim:true 
-    }
+    },
+    description:{
+        type:String,
+        trim:true
+    },
+    areaOfExpertise:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Technology"
+    }],
 })
 
 module.exports=mongoose.model("Profile",profileSchema);

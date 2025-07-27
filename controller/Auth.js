@@ -134,8 +134,9 @@ exports.signUp=async(req,res)=>{
         const profileDetails=await Profile.create({
             gender:null,
             dateOfBirth:null,
-            about:null,
-            contactNumber:null
+            description:null,
+            contactNumber:null,
+            areaOfExpertise:[],
         });
         
         const user=await User.create({
