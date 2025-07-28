@@ -133,14 +133,16 @@ exports.signUp=async(req,res)=>{
         const hashPassword=await bcrypt.hash(password,10);
         
         //create entry in db
+        const img=imageUrl || `https://api.dicebear.com/5.x/initials/svg?seed=${fullName}`
         const profileDetails=await Profile.create({
             gender:null,
             dateOfBirth:null,
             description:null,
             contactNumber:null,
             areaOfExpertise:[],
+            image:img,
         });
-        const img=imageUrl || `https://api.dicebear.com/5.x/initials/svg?seed=${fullName}`
+        
         console.log("saving: ", fullName, email, hashPassword, accountType, profileDetails._id, img);
         
         const user=await User.create({
@@ -150,7 +152,6 @@ exports.signUp=async(req,res)=>{
         password:hashPassword,
         accountType,
         additionalDetails:profileDetails._id,
-        image:img,
         active
         });
         user.password=undefined; //to not send password in response
